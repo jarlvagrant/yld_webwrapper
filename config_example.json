@@ -1,0 +1,12 @@
+{
+    "video_dir": "/video",
+    "audio_dir": "/audio",
+    "ebook_dir": "/Users/xxm/Downloads",
+    "email": {
+        "from": "jarlvagrant@gmx.com",
+        "to": "jarlvagrant_d9suVB@kindle.com",
+        "host": "mail.gmx.com",
+        "secret": "xxmGMX@2024",
+        "port": 587
+    }
+}

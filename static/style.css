@@ -219,11 +219,19 @@ input[type=submit] {
   background-color: #ccc;
 }
 
-.collapsible:after {
+.collapsible:after{
   color: white;
   font-weight: bold;
   float: right;
+  margin-right: 5px;
+}
+
+.collapsible:before {
+  content: "\2630";
+  color: white;
+  font-weight: bold;
   margin-left: 5px;
+  margin-right: 5px;
 }
 
 .active:after {

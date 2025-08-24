@@ -7,7 +7,7 @@
 {% endblock %}
 <div id="book_top_url" style="padding-left: 12px">
   {% for url, status in book_urls.items() %}
-  <button type="button" class="collapsible {{ status.is_collapsed }}" name="collapsible_web" onclick="toggle_collapse(this)" oncontextmenu="onItemMenu(event)">{{ url }}</button>
+  <button type="button" class="collapsible {{ status.is_collapsed }}" name="collapsible_web" onclick="toggle_collapse(event)" oncontextmenu="onItemMenu(event)">{{ url }}</button>
   <div class="collapsible_content" {% if status.is_collapsed %}style="display:block"{% endif %}>
     <label class="gray">Extract method:</label>
     <a class="epub" id="epub{{ url }}" {% if status.epub|length > 0 %}href="{{ url_for('ebk_download', file_path=status.epub) }}" style="float: right; margin-right: 2em"{% else %}style="color:lightgray; float: right; margin-right: 2em"{% endif %} download="">EPUB</a>

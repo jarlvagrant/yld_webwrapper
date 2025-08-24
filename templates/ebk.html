@@ -130,18 +130,20 @@
     }
 
     function hideItemMenu() {
-        document.getElementById("contextMenu").style.display = "none"
+        if (! event.target.classList.contains('collapsible') || event.pageX >= 80)
+            document.getElementById("contextMenu").style.display = "none"
     }
 
     function onItemMenu(event) {
         event.preventDefault();
         let menu = document.getElementById("contextMenu")
         if (menu.style.display === "block")
-            hideItemMenu();
+            document.getElementById("contextMenu").style.display = "none"
         else {
             menu.style.display = 'block';
             menu.style.left = event.pageX + "px";
             menu.style.top = event.pageY + "px";
+            console.log(menu.style.left, menu.style.top);
             if (event.target.name === "collapsible_local") {
                 document.getElementById("context_menu_extract").style.display = "none";
                 document.getElementById("context_menu_extract_email").style.display = "none";
@@ -278,23 +280,28 @@
         }
     }
 
-    function toggle_collapse(input) {
-        let is_collapsed = input.classList.toggle('active');
-        let content = input.nextElementSibling;
-        if (content.style.display === "block") {
-            content.style.display = "none";
+    function toggle_collapse(event) {
+        if (event.pageX < 80) {
+            onItemMenu(event)
         } else {
-            content.style.display = "block";
-        }
-        let value = ""
-        if (is_collapsed) {
-            value = "active"
-        }
-        $.post("/ebk_sync_input", {"key": input.innerText, "sub_key": "is_collapsed", "value": value}, function (response) {
-            if (response.code === 200) {
-                console.log("Sync input " + input.innerText + ": is_collapsed" + "=" + value);
+            let input = event.target;
+            let is_collapsed = input.classList.toggle('active');
+            let content = input.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
             }
-        })
+            let value = ""
+            if (is_collapsed) {
+                value = "active"
+            }
+            $.post("/ebk_sync_input", {"key": input.innerText, "sub_key": "is_collapsed", "value": value}, function (response) {
+                if (response.code === 200) {
+                    console.log("Sync input " + input.innerText + ": is_collapsed" + "=" + value);
+                }
+            })
+        }
     }
 
     async function upload_ebooks() {

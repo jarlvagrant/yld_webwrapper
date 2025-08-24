@@ -116,8 +116,9 @@ class EbookUploads(View):
 				for f in files:
 					file_name = clean_txt(f.filename)
 					file_path = os.path.join(path, file_name)
+					_, file_extension = os.path.splitext(file_path)
 					f.save(file_path)
-					local_book_dict.set_value(file_name, "txt", file_path)
+					local_book_dict.set_value(file_name, file_extension.lstrip('.'), file_path)
 					logger.debug(f"Uploaded file: {file_path}")
 				return Response(status=200)
 		return render_template("ebk_uploads.html", txt_files=local_book_dict.status)

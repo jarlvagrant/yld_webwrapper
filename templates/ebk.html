@@ -23,7 +23,7 @@
 <table>
     <tr>
         <form action="javascript:upload_ebooks()" enctype="multipart/form-data" method="post">
-            <td>Local files: <input class="table" type="file" id="docs" name="docs" accept=".txt" multiple/></td>
+            <td>Local files: <input class="table" type="file" id="docs" name="docs" accept=".txt,.epub,.mobi,.azw,.pdf" multiple/></td>
             <td style="width: 8rem">
                 <button style="min-width: 8rem;">Upload</button>
             </td>
@@ -143,7 +143,6 @@
             menu.style.display = 'block';
             menu.style.left = event.pageX + "px";
             menu.style.top = event.pageY + "px";
-            console.log(menu.style.left, menu.style.top);
             if (event.target.name === "collapsible_local") {
                 document.getElementById("context_menu_extract").style.display = "none";
                 document.getElementById("context_menu_extract_email").style.display = "none";
